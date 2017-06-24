@@ -58,6 +58,10 @@ public class WatchingFlightsContent {
         public final String content;
         public final String details;
 
+        public final String src = "Milan";
+        public final String dst = "Prague";
+
+
         public WatchingFlight(String id, String content, String details) {
             this.id = id;
             this.content = content;
@@ -66,7 +70,10 @@ public class WatchingFlightsContent {
 
         @Override
         public String toString() {
-            return content;
+            StringBuilder builder = new StringBuilder();
+            builder.append(src).append(" -> ").append(dst);
+            builder.append(" ").append(content);
+            return builder.toString();
         }
     }
 }

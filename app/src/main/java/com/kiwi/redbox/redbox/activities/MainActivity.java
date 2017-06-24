@@ -3,15 +3,16 @@ package com.kiwi.redbox.redbox.activities;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
 import com.kiwi.redbox.redbox.R;
 import com.kiwi.redbox.redbox.adapters.SectionPagerAdapter;
 import com.kiwi.redbox.redbox.fragments.NewWatchFragment;
 import com.kiwi.redbox.redbox.fragments.WatchingFragment;
-import com.kiwi.redbox.redbox.adapters.WatchingItemRecyclerViewAdapter;
 import com.kiwi.redbox.redbox.fragments.content.WatchingFlightsContent;
 
 public class MainActivity extends AppCompatActivity implements WatchingFragment.OnListFragmentInteractionListener, NewWatchFragment.OnFragmentInteractionListener{
@@ -71,6 +72,15 @@ public class MainActivity extends AppCompatActivity implements WatchingFragment.
     @Override
     public void onFragmentInteraction(Uri uri) {
         Toast.makeText(getApplicationContext(), TAG + " onFragmentInteraction",Toast.LENGTH_SHORT).show();
+
+    }
+
+
+
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new NewWatchFragment.DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+
 
     }
 }
