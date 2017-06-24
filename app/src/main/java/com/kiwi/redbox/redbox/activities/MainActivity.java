@@ -7,9 +7,12 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kiwi.redbox.redbox.R;
+import com.kiwi.redbox.redbox.ResultObject;
 import com.kiwi.redbox.redbox.adapters.SectionPagerAdapter;
 import com.kiwi.redbox.redbox.fragments.NewWatchFragment;
 import com.kiwi.redbox.redbox.fragments.WatchingFragment;
@@ -81,6 +84,20 @@ public class MainActivity extends AppCompatActivity implements WatchingFragment.
         DialogFragment newFragment = new NewWatchFragment.DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
 
+
+    }
+
+    public void createResultObject(View v){
+        String dateText = ((TextView)findViewById(R.id.dateView)).getText().toString();
+        String buyPriceS = ((EditText)findViewById(R.id.editTextPrize)).getText().toString();
+        int buyPrice = 0;
+        if(!buyPriceS.equals("")) {
+            buyPrice = Integer.parseInt(buyPriceS);
+        }
+        if(dateText!= null && buyPrice != 0) {
+            ResultObject ret = new ResultObject(buyPrice, "Prague", "Milan", dateText, dateText);
+            Toast.makeText(this, ret.toString(), Toast.LENGTH_LONG).show();
+        }
 
     }
 }

@@ -12,10 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kiwi.redbox.redbox.R;
+import com.kiwi.redbox.redbox.ResultObject;
 
 import java.util.Calendar;
 
@@ -39,7 +41,7 @@ public class NewWatchFragment extends Fragment{
 
     private OnFragmentInteractionListener mListener;
 
-    private static TextView dateTextView;
+
 
     public NewWatchFragment() {
         // Required empty public constructor
@@ -77,8 +79,6 @@ public class NewWatchFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        dateTextView = (TextView)getActivity().findViewById(R.id.dateView);
-
         return inflater.inflate(R.layout.fragment_new_watch, container, false);
     }
 
@@ -124,6 +124,17 @@ public class NewWatchFragment extends Fragment{
         void onFragmentInteraction(Uri uri);
     }
 
+    public ResultObject createResultObject(){
+        String dateText = ((TextView)getActivity().findViewById(R.id.dateView)).getText().toString();
+        String buyPriceS = ((EditText)getActivity().findViewById(R.id.editTextPrize)).getText().toString();
+        int buyPrice = Integer.parseInt(buyPriceS);
+        if(dateText!= null) {
+            ResultObject ret = new ResultObject(buyPrice, "Prague", "Milan", dateText, dateText);
+            Toast.makeText(getContext(), ret.toString(), Toast.LENGTH_LONG).show();
+        }
+        return null;
+    }
+
 
     public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
@@ -143,10 +154,9 @@ public class NewWatchFragment extends Fragment{
 
         @Override
         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-            if(dateTextView != null) {
-                dateTextView.setText(new StringBuilder().append(i).append("/")
-                        .append(i1).append("/").append(i2));
-            }
+            ((TextView)getActivity().findViewById(R.id.dateView)).setText(new StringBuilder().append(i).append("/")
+                    .append(i1).append("/").append(i2).toString());
+
         }
     }
 }
