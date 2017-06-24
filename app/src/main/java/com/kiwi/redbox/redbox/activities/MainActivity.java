@@ -7,6 +7,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,12 +70,12 @@ public class MainActivity extends AppCompatActivity implements WatchingFragment.
 
     @Override
     public void onListFragmentInteraction(WatchingFlightsContent.WatchingFlight item) {
-        Toast.makeText(getApplicationContext(), TAG + " onListFragmentInteraction",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), TAG + " onListFragmentInteraction",Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-        Toast.makeText(getApplicationContext(), TAG + " onFragmentInteraction",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), TAG + " onFragmentInteraction",Toast.LENGTH_SHORT).show();
 
     }
 
@@ -84,6 +85,22 @@ public class MainActivity extends AppCompatActivity implements WatchingFragment.
         DialogFragment newFragment = new NewWatchFragment.DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
 
+
+    }
+
+    public void predictPrice(View v){
+        String dateText = ((TextView)findViewById(R.id.dateView)).getText().toString();
+
+        Toast.makeText(getApplicationContext(), "Waiting for predicted price.", Toast.LENGTH_LONG);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ((EditText)findViewById(R.id.editTextPrize)).setVisibility(View.VISIBLE);
+        ((Button)findViewById(R.id.ok_2)).setVisibility(View.VISIBLE);
 
     }
 
@@ -98,6 +115,10 @@ public class MainActivity extends AppCompatActivity implements WatchingFragment.
             ResultObject ret = new ResultObject(buyPrice, "Prague", "Milan", dateText, dateText);
             Toast.makeText(this, ret.toString(), Toast.LENGTH_LONG).show();
         }
+
+        WatchingFlightsContent.WatchingFlight toAddToList
+                = new WatchingFlightsContent.WatchingFlight("1", "MXP" + " -> " + "PRG", buyPriceS, dateText);
+        WatchingFlightsContent.ITEMS.add(toAddToList);
 
     }
 }

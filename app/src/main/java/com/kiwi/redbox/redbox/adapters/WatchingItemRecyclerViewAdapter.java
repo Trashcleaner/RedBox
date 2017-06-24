@@ -1,9 +1,12 @@
 package com.kiwi.redbox.redbox.adapters;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kiwi.redbox.redbox.R;
@@ -37,8 +40,9 @@ public class WatchingItemRecyclerViewAdapter extends RecyclerView.Adapter<Watchi
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(mValues.get(position).route);
+        holder.mContentView.setText("Demanded price: " + mValues.get(position).price + "€, Date: " + holder.mItem.date);
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,12 +66,14 @@ public class WatchingItemRecyclerViewAdapter extends RecyclerView.Adapter<Watchi
         public final TextView mIdView;
         public final TextView mContentView;
         public WatchingFlight mItem;
+        public ImageView imageView;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.id);
             mContentView = (TextView) view.findViewById(R.id.content);
+            imageView = (ImageView) view.findViewById(R.id.list_item_status_picture);
         }
 
         @Override
